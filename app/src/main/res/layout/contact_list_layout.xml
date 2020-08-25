@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/contactName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/editContact"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_edit"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:id="@+id/deleteContact"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_remove"
+                android:contentDescription="TODO" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_below="@+id/contactName"
+            android:id="@+id/phoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="12sp"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
