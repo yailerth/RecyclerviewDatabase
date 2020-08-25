@@ -59,8 +59,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
 
         }
 
-        Intent intent = new Intent("message_subject_intent");
-        intent.putExtra("vTotal",total);
+        /*Intent intent = new Intent("message_subject_intent");
+        intent.putExtra("vTotal",total);*/
 
 
 
