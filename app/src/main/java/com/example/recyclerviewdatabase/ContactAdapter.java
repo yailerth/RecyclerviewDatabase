@@ -23,6 +23,7 @@ import java.util.Objects;
 public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
         implements Filterable {
 
+
     private Context context;
     private ArrayList<Contacts> listContacts;
     private ArrayList<Contacts> mArrayList;
@@ -57,10 +58,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
             total = total + Integer.parseInt(listContacts.get(i).getPhno());
 
         }
+
+        Intent intent = new Intent("message_subject_intent");
+        intent.putExtra("vTotal",total);
+
+
+
         Toast.makeText(context, "Total: "+total,Toast.LENGTH_LONG).show();
-
-
-
 
         holder.editContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +92,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
                 context.startActivity(intent);
             }
         });
+    }
+
+    public interface OninputListener{
+        void sendInput(int vTotal);
     }
 
     @Override
@@ -118,7 +126,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
                 notifyDataSetChanged();
             }
         };
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -162,6 +173,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
         });
         builder.show();
     }
+
+
 
 /*    public void setOnClickListener(View.OnClickListener listener){
         this.listener = listener;

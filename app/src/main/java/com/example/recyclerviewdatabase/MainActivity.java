@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,11 +22,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private SqliteDatabase mDatabase;
+    TextView txtVtotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        txtVtotal = (TextView)findViewById(R.id.txtVtotal);
 
         final RecyclerView contactView = findViewById(R.id.myContactList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
