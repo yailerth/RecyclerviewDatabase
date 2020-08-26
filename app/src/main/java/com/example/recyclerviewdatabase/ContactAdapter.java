@@ -136,14 +136,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
     @Override
     public int getItemCount() {
         int count = listContacts.size();
-        if (count>=4){
+        return count;
+        /*if (count>=4){
             Toast.makeText(context, "Items: "+count,Toast.LENGTH_SHORT).show();
             return count;
         }else
-            return 5;
-
-
-
+            return 5;*/
     }
 
     private void editTaskDialog(final Contacts contacts) {

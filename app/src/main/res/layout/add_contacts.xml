@@ -3,26 +3,49 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/enterCantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad"
+        android:inputType="number"
+        android:fontFamily="sans-serif-condensed"
+        android:digits="1234567890"
+        android:maxLines="1"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="12dp"
+        android:background="@drawable/borderview"/>
+
     <EditText
         android:id="@+id/enterName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Equipo"
-        android:inputType="textCapCharacters"
+        android:hint="Descripción"
+        android:inputType="textCapWords"
+        android:fontFamily="sans-serif-condensed"
         android:maxLines="1"
-        android:layout_marginRight="8dp"
-        android:layout_marginEnd="8dp"
-        android:padding="12dp"/>
+        android:layout_margin="10dp"
+        android:padding="12dp"
+        android:background="@drawable/borderview"/>
+
+
     <EditText
         android:id="@+id/enterPhoneNum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Protocolo"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginEnd="8dp"
+        android:hint="Valor unitario"
+        android:layout_margin="10dp"
         android:padding="12dp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:inputType="textCapSentences|textMultiLine"
-        android:textSize="14sp"/>
+        android:fontFamily="sans-serif-condensed"
+        android:inputType="number"
+        android:digits="1234567890"
+        android:textSize="14sp"
+        android:background="@drawable/borderview"/>
+
+
 </LinearLayout>
