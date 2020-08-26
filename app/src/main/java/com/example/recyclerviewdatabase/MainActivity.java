@@ -10,16 +10,18 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SubTotalListener{
 
     private SqliteDatabase mDatabase;
     TextView txtVtotal;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtVtotal = (TextView)findViewById(R.id.txtVtotal);
 
+
         final RecyclerView contactView = findViewById(R.id.myContactList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         contactView.setLayoutManager(linearLayoutManager);
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Contacts> allContacts = mDatabase.listContacts();
         if (allContacts.size() > 0) {
             contactView.setVisibility(View.VISIBLE);
-            ContactAdapter mAdapter = new ContactAdapter(this, allContacts);
+            ContactAdapter mAdapter = new ContactAdapter(this, allContacts,this);
             contactView.setAdapter(mAdapter);
         }
         else {
@@ -98,6 +101,19 @@ public class MainActivity extends AppCompatActivity {
         if (mDatabase != null) {
             mDatabase.close();
         }
+    }
+
+    @Override
+    public void onSubTotalUpdate(int total) {
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        //((TextView)findViewById(R.id.txtVtotal)).setText(format.format(total));
+        /*NumberFormat formatter = new DecimalFormat("###,###,###,###");
+        double myNumber = total;
+        //String str = formatter.format(myNumber);
+        String str = formatter.getCurrencyInstance(new Locale("en","US")).format(myNumber);
+        //String str = NumberFormat.getCurrencyInstance(Locale.US).format(myNumber);*/
+        txtVtotal.setText(format.format(total));
     }
 
     //probando desde casa

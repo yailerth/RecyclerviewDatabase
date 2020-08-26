@@ -20,8 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
-        implements Filterable {
+public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> implements Filterable {
 
 
     private Context context;
@@ -29,13 +28,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
     private ArrayList<Contacts> mArrayList;
     private SqliteDatabase mDatabase;
     float sum=0;
+    private SubTotalListener subTotalListener;
     //private View.OnClickListener listener;
 
-    public ContactAdapter(Context context, ArrayList<Contacts> listContacts) {
+    public ContactAdapter(Context context, ArrayList<Contacts> listContacts,SubTotalListener subTotalListener) {
         this.context = context;
         this.listContacts = listContacts;
         this.mArrayList = listContacts;
         mDatabase = new SqliteDatabase(context);
+
+        this.subTotalListener = subTotalListener;
+
     }
 
 
@@ -58,13 +61,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
             total = total + Integer.parseInt(listContacts.get(i).getPhno());
 
         }
+        countTotal(total);
 
         /*Intent intent = new Intent("message_subject_intent");
         intent.putExtra("vTotal",total);*/
-
-
-
-        Toast.makeText(context, "Total: "+total,Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "Total: "+total,Toast.LENGTH_LONG).show();
 
         holder.editContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +95,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
         });
     }
 
-    public interface OninputListener{
-        void sendInput(int vTotal);
+    public void countTotal(int total){
+        // Calculate your total amount here from your arraylist and pass in below call.
+        subTotalListener.onSubTotalUpdate(total);
     }
 
     @Override
@@ -133,7 +135,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
 
     @Override
     public int getItemCount() {
-        return listContacts.size();
+        int count = listContacts.size();
+        if (count>=4){
+            Toast.makeText(context, "Items: "+count,Toast.LENGTH_SHORT).show();
+            return count;
+        }else
+            return 5;
+
+
+
     }
 
     private void editTaskDialog(final Contacts contacts) {
@@ -174,9 +184,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder>
         builder.show();
     }
 
-
-
-/*    public void setOnClickListener(View.OnClickListener listener){
+    /*    public void setOnClickListener(View.OnClickListener listener){
         this.listener = listener;
     }
 
