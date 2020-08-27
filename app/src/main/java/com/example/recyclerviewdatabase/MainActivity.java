@@ -63,8 +63,9 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
         View subView = inflater.inflate(R.layout.add_contacts, null);
         final EditText nameField = subView.findViewById(R.id.enterName);
         final EditText noField = subView.findViewById(R.id.enterPhoneNum);
+        final EditText cantidadField = subView.findViewById(R.id.enterCantidad);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Agregar protocolo");
+        builder.setTitle("Agregar producto");
         builder.setView(subView);
         builder.create();
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -72,11 +73,13 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
             public void onClick(DialogInterface dialog, int which) {
                 final String name = nameField.getText().toString();
                 final String ph_no = noField.getText().toString();
+                final String cantidad = cantidadField.getText().toString();
+
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(MainActivity.this, "Por favor llene la casilla equipo!!!", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Contacts newContact = new Contacts(name, ph_no);
+                    Contacts newContact = new Contacts(name, ph_no,cantidad);
                     mDatabase.addContacts(newContact);
                     Toast.makeText(MainActivity.this, "Protocolo guardado!!!", Toast.LENGTH_LONG).show();
 

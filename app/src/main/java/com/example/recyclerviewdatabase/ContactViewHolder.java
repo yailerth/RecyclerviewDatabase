@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    TextView tvName, tvPhoneNum;
+    TextView tvName, tvPhoneNum, tvCantProd;
     ImageView deleteContact;
     ImageView editContact;
     private ItemClickListener itemClickListener;
@@ -20,6 +20,7 @@ public class ContactViewHolder extends RecyclerView.ViewHolder implements View.O
         tvPhoneNum = itemView.findViewById(R.id.phoneNum);
         deleteContact = itemView.findViewById(R.id.deleteContact);
         editContact = itemView.findViewById(R.id.editContact);
+        tvCantProd = itemView.findViewById(R.id.editContact);
 
         itemView.setOnClickListener(this);
     }

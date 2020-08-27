@@ -15,6 +15,7 @@ public class SqliteDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "contactName";
     private static final String COLUMN_NO = "phoneNumber";
+    private static final String COLUMN_CANTPRODUCTO = "cantidadProducto";
 
     SqliteDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,7 +27,8 @@ public class SqliteDatabase extends SQLiteOpenHelper {
                 + TABLE_CONTACTS + "(" + COLUMN_ID
                 + " INTEGER PRIMARY KEY,"
                 + COLUMN_NAME + " TEXT,"
-                + COLUMN_NO + " INTEGER" + ")";
+                + COLUMN_NO + " INTEGER"
+                + COLUMN_CANTPRODUCTO + "INTEGER" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -47,7 +49,8 @@ public class SqliteDatabase extends SQLiteOpenHelper {
                 int id = Integer.parseInt(cursor.getString(0));
                 String name = cursor.getString(1);
                 String phno = cursor.getString(2);
-                storeContacts.add(new Contacts(id, name, phno));
+                String contact = cursor.getString(3);
+                storeContacts.add(new Contacts(id, name, phno,contact));
             }
             while (cursor.moveToNext());
         }
@@ -58,6 +61,7 @@ public class SqliteDatabase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, contacts.getName());
         values.put(COLUMN_NO, contacts.getPhno());
+        values.put(COLUMN_CANTPRODUCTO, contacts.getCantidadProd());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_CONTACTS, null, values);
     }

@@ -56,6 +56,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         holder.tvName.setText(contacts.getName());
         holder.tvPhoneNum.setText("$ " + contacts.getPhno());
 
+
         int total = 0;
         for(int i = 0; i < listContacts.size(); i++){
             total = total + Integer.parseInt(listContacts.get(i).getPhno());
@@ -166,7 +167,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
                     Toast.makeText(context, "Por favor llene la casilla equipo!!!", Toast.LENGTH_LONG).show();
                 } else {
                     mDatabase.updateContacts(new
-                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no));
+                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no, c));
                     ((Activity) context).finish();
                     context.startActivity(((Activity)
                             context).getIntent());
