@@ -54,7 +54,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         final Contacts contacts = listContacts.get(position);
         holder.tvName.setText(contacts.getName());
-        holder.tvPhoneNum.setText(contacts.getPhno());
+        holder.tvPhoneNum.setText("$ " + contacts.getPhno());
 
         int total = 0;
         for(int i = 0; i < listContacts.size(); i++){
