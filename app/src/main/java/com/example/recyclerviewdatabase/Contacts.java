@@ -5,17 +5,20 @@ public class Contacts {
     private String name;
     private String phoneNumber;
     private String cantidadProd;
+    private int total;
 
     Contacts(String name, String phno, String cantidadProd) {
         this.name = name;
         this.phoneNumber = phno;
         this.cantidadProd = cantidadProd;
+        //this.total = total;
     }
-    Contacts(int id, String name, String phno, String cantidadProd) {
+    Contacts(int id, String name, String phno, String cantidadProd, int total) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phno;
         this.cantidadProd = cantidadProd;
+        this.total = total;
     }
     int getId() {
         return id;
@@ -40,6 +43,14 @@ public class Contacts {
     }
     public void setCantidadProd(String cantidadProd) {
         this.cantidadProd = cantidadProd;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
 

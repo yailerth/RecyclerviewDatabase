@@ -52,8 +52,21 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         final Contacts contacts = listContacts.get(position);
         holder.tvName.setText(contacts.getName());
-        holder.tvPhoneNum.setText(contacts.getPhno());
+        holder.tvPhoneNum.setText(" $ " + contacts.getPhno());
         holder.tvCantProd.setText(contacts.getCantidadProd());
+        holder.tvTotal.setText("$ " + contacts.getTotal());
+
+
+        /*int totalProd = 0;
+
+        for(int i = 0; i < listContacts.size(); i++){
+            int a=Integer.parseInt(listContacts.get(i).getPhno());
+            int b=Integer.parseInt(listContacts.get(i).getCantidadProd());
+            totalProd = a*b;
+
+        }
+        holder.tvTotal.setText("$ "+totalProd);*/
+
 
         int total = 0;
         for(int i = 0; i < listContacts.size(); i++){
@@ -161,11 +174,16 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
                 final String name = nameField.getText().toString();
                 final String ph_no = contactField.getText().toString();
                 final String cantidad = cantProdField.getText().toString();
-                if (TextUtils.isEmpty(name)) {
-                    Toast.makeText(context, "Por favor llene la casilla equipo!!!", Toast.LENGTH_LONG).show();
+
+                final int a=Integer.parseInt(ph_no);
+                final int b=Integer.parseInt(cantidad);
+                final int totalProd = a*b;
+
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(ph_no) || TextUtils.isEmpty(cantidad)) {
+                    Toast.makeText(context, "Datos incompletos, inténtalo de nuevo!!!", Toast.LENGTH_LONG).show();
                 } else {
                     mDatabase.updateContacts(new
-                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no, cantidad));
+                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no, cantidad,totalProd));
                     ((Activity) context).finish();
                     context.startActivity(((Activity)
                             context).getIntent());

@@ -57,7 +57,13 @@ public class SqliteDatabase extends SQLiteOpenHelper {
                 String name = cursor.getString(1);
                 String phno = cursor.getString(2);
                 String cantipro = cursor.getString(3);
-                storeContacts.add(new Contacts(id, name, phno, cantipro));
+
+                int totalProd = 0;
+                int a=Integer.parseInt(phno);
+                int b=Integer.parseInt(cantipro);
+                totalProd = a*b;
+
+                storeContacts.add(new Contacts(id, name, phno, cantipro, totalProd));
 
                 Log.i(name,phno);
 

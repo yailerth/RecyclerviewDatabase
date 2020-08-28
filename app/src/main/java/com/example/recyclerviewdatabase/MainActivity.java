@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
         });
 
     }
+
+
     private void addTaskDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View subView = inflater.inflate(R.layout.add_contacts, null);
@@ -74,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
                 final String ph_no = noField.getText().toString();
                 final String cantidad = cantidadField.getText().toString();
 
-                if (TextUtils.isEmpty(name)) {
-                    Toast.makeText(MainActivity.this, "Por favor llene la casilla equipo!!!", Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(ph_no) || TextUtils.isEmpty(cantidad)) {
+                    Toast.makeText(MainActivity.this, "Datos incompletos, inténtalo de nuevo!!!", Toast.LENGTH_LONG).show();
                 }
                 else {
                     Contacts newContact = new Contacts(name, ph_no, cantidad);
@@ -94,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
         });
         builder.show();
     }
+    
+    
 
 
     @Override
