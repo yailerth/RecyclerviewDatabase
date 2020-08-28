@@ -36,9 +36,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         this.listContacts = listContacts;
         this.mArrayList = listContacts;
         mDatabase = new SqliteDatabase(context);
-
         this.subTotalListener = subTotalListener;
-
     }
 
 
@@ -55,6 +53,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         final Contacts contacts = listContacts.get(position);
         holder.tvName.setText(contacts.getName());
         holder.tvPhoneNum.setText("$ " + contacts.getPhno());
+        holder.tvCantProd.setText(contacts.getCantidadProd());
 
 
         int total = 0;
@@ -129,8 +128,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
                 notifyDataSetChanged();
             }
         };
-
-
     }
 
 
@@ -150,6 +147,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         View subView = inflater.inflate(R.layout.add_contacts, null);
         final EditText nameField = subView.findViewById(R.id.enterName);
         final EditText contactField = subView.findViewById(R.id.enterPhoneNum);
+        final EditText cantProdField = subView.findViewById(R.id.enterCantidad);
         if (contacts != null) {
             nameField.setText(contacts.getName());
             contactField.setText(String.valueOf(contacts.getPhno()));
@@ -163,11 +161,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
             public void onClick(DialogInterface dialog, int which) {
                 final String name = nameField.getText().toString();
                 final String ph_no = contactField.getText().toString();
+                final String cantidad = cantProdField.getText().toString();
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(context, "Por favor llene la casilla equipo!!!", Toast.LENGTH_LONG).show();
                 } else {
                     mDatabase.updateContacts(new
-                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no, c));
+                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no,cantidad));
                     ((Activity) context).finish();
                     context.startActivity(((Activity)
                             context).getIntent());
