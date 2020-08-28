@@ -35,7 +35,7 @@ public class Contacts {
     public void setPhno(String phno) {
         this.phoneNumber = phno;
     }
-    public String getCantidadProd() {
+    String getCantidadProd() {
         return cantidadProd;
     }
     public void setCantidadProd(String cantidadProd) {

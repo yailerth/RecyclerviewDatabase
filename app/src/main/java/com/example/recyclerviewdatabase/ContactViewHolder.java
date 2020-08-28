@@ -20,7 +20,7 @@ public class ContactViewHolder extends RecyclerView.ViewHolder implements View.O
         tvPhoneNum = itemView.findViewById(R.id.phoneNum);
         deleteContact = itemView.findViewById(R.id.deleteContact);
         editContact = itemView.findViewById(R.id.editContact);
-        tvCantProd = itemView.findViewById(R.id.editContact);
+        tvCantProd = itemView.findViewById(R.id.txtCantidad);
 
         itemView.setOnClickListener(this);
     }

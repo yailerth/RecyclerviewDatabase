@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
 
         txtVtotal = (TextView)findViewById(R.id.txtVtotal);
 
-
         final RecyclerView contactView = findViewById(R.id.myContactList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         contactView.setLayoutManager(linearLayoutManager);
@@ -79,10 +78,9 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
                     Toast.makeText(MainActivity.this, "Por favor llene la casilla equipo!!!", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Contacts newContact = new Contacts(name, ph_no,cantidad);
+                    Contacts newContact = new Contacts(name, ph_no, cantidad);
                     mDatabase.addContacts(newContact);
-                    Toast.makeText(MainActivity.this, "Protocolo guardado!!!", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(MainActivity.this, "Cantidad: "+ cantidad+"\nNombre:  " +name+"\nValor: " + ph_no, Toast.LENGTH_LONG).show();
                     finish();
                     startActivity(getIntent());
                 }

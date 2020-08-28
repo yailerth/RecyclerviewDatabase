@@ -52,14 +52,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         final Contacts contacts = listContacts.get(position);
         holder.tvName.setText(contacts.getName());
-        holder.tvPhoneNum.setText("$ " + contacts.getPhno());
+        holder.tvPhoneNum.setText(contacts.getPhno());
         holder.tvCantProd.setText(contacts.getCantidadProd());
-
 
         int total = 0;
         for(int i = 0; i < listContacts.size(); i++){
             total = total + Integer.parseInt(listContacts.get(i).getPhno());
-
         }
         countTotal(total);
 
@@ -151,6 +149,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         if (contacts != null) {
             nameField.setText(contacts.getName());
             contactField.setText(String.valueOf(contacts.getPhno()));
+            cantProdField.setText(String.valueOf(contacts.getCantidadProd()));
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Editar protocolo");
@@ -166,7 +165,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
                     Toast.makeText(context, "Por favor llene la casilla equipo!!!", Toast.LENGTH_LONG).show();
                 } else {
                     mDatabase.updateContacts(new
-                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no,cantidad));
+                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no, cantidad));
                     ((Activity) context).finish();
                     context.startActivity(((Activity)
                             context).getIntent());
