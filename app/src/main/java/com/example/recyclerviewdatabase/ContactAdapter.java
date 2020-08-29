@@ -56,27 +56,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         holder.tvCantProd.setText(contacts.getCantidadProd());
         holder.tvTotal.setText("$ " + contacts.getTotal());
 
-
-        /*int totalProd = 0;
-
-        for(int i = 0; i < listContacts.size(); i++){
-            int a=Integer.parseInt(listContacts.get(i).getPhno());
-            int b=Integer.parseInt(listContacts.get(i).getCantidadProd());
-            totalProd = a*b;
-
-        }
-        holder.tvTotal.setText("$ "+totalProd);*/
-
-
         int total = 0;
         for(int i = 0; i < listContacts.size(); i++){
-            total = total + Integer.parseInt(listContacts.get(i).getPhno());
+            //total = total + Integer.parseInt(listContacts.get(i).getPhno());
+            total = total + listContacts.get(i).getTotal();
         }
         countTotal(total);
-
-        /*Intent intent = new Intent("message_subject_intent");
-        intent.putExtra("vTotal",total);*/
-        //Toast.makeText(context, "Total: "+total,Toast.LENGTH_LONG).show();
 
         holder.editContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,11 +131,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
     public int getItemCount() {
         int count = listContacts.size();
         return count;
-        /*if (count>=4){
-            Toast.makeText(context, "Items: "+count,Toast.LENGTH_SHORT).show();
-            return count;
-        }else
-            return 5;*/
+
     }
 
     private void editTaskDialog(final Contacts contacts) {
@@ -172,15 +153,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String name = nameField.getText().toString();
-                final String ph_no = contactField.getText().toString();
-                final String cantidad = cantProdField.getText().toString();
+                String ph_no = contactField.getText().toString();
+                String cantidad = cantProdField.getText().toString();
+
+                if (cantidad.equals("")) cantidad = "0";
+                if (ph_no.equals("")) ph_no = "0";
 
                 final int a=Integer.parseInt(ph_no);
                 final int b=Integer.parseInt(cantidad);
                 final int totalProd = a*b;
 
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(ph_no) || TextUtils.isEmpty(cantidad)) {
-                    Toast.makeText(context, "Datos incompletos, inténtalo de nuevo!!!", Toast.LENGTH_LONG).show();
+
+                if (name.isEmpty() || ph_no.equals("0")|| cantidad.equals("0")) {
+                    Toast.makeText(context, "  Espacios sin llenar \n\nVuelve a intentarlo!!!", Toast.LENGTH_LONG).show();
                 } else {
                     mDatabase.updateContacts(new
                             Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no, cantidad,totalProd));
