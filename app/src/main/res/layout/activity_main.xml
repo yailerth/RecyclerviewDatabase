@@ -125,7 +125,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="20dp"
                         android:paddingBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/cardViewTotal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/linearRepUtil" />
@@ -142,11 +142,115 @@
                         android:src="@drawable/ic_add"
                         app:elevation="4dp"
                         app:fabSize="mini"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/cardViewTotal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/linearRepUtil"
                         app:layout_constraintVertical_bias="1.0"
                         app:rippleColor="#ffffff" />
+
+                    <!--Linear Precio total-->
+                    <LinearLayout
+                        android:id="@+id/cardViewTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical"
+                            android:gravity="end"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:text="Subtotal:  "
+                                android:textColor="#000000"
+                                android:textSize="12sp"
+                                android:layout_above="@+id/iva"/>
+
+                            <TextView
+                                android:id="@+id/iva"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:text="IVA 19%:  "
+                                android:textColor="#000000"
+                                android:textSize="12sp"
+                                android:layout_above="@+id/Total"/>
+
+                            <TextView
+                                android:id="@+id/Total"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:text="Total: "
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:layout_alignParentBottom="true"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="end">
+
+                            <TextView
+                                android:id="@+id/txtSubtotal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="5dp"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:text="$ 0.00"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/txtIva"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="5dp"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:text="$ 0.00"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/txtTotal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="5dp"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:text="$ 0.00"
+                                android:textColor="#000000"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -156,51 +260,6 @@
 
     </ScrollView>
 
-    <!--Linear Precio total-->
-    <LinearLayout
-        android:id="@+id/cardViewTotal"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/borderview">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-
-                android:layout_toLeftOf="@+id/txtVtotal"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:text="TOTAL:  "
-                />
-
-            <TextView
-                android:id="@+id/txtVtotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:layout_marginEnd="5dp"
-                android:layout_alignParentEnd="true"
-                android:text="$ 0.00"
-                />
-
-        </RelativeLayout>
-
-    </LinearLayout>
 
 </RelativeLayout>

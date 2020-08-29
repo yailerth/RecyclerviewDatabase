@@ -24,14 +24,16 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements SubTotalListener{
 
     private SqliteDatabase mDatabase;
-    TextView txtVtotal;
+    TextView txtSubtotal,txtIva,txtTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtVtotal = (TextView)findViewById(R.id.txtVtotal);
+        txtSubtotal = (TextView)findViewById(R.id.txtSubtotal);
+        txtIva = (TextView)findViewById(R.id.txtIva);
+        txtTotal = (TextView)findViewById(R.id.txtTotal);
 
         final RecyclerView contactView = findViewById(R.id.myContactList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -110,21 +112,20 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
 
     @Override
     public void onSubTotalUpdate(int total) {
-
         NumberFormat format = NumberFormat.getCurrencyInstance();
-        //((TextView)findViewById(R.id.txtVtotal)).setText(format.format(total));
-        /*NumberFormat formatter = new DecimalFormat("###,###,###,###");
+        txtSubtotal.setText(format.format(total));
+
+        double valorIva = total*0.19;
+        txtIva.setText(format.format(valorIva));
+
+        double valorTotal = total+valorIva;
+        txtTotal.setText(format.format(valorTotal));
+    }
+}
+
+  /*((TextView)findViewById(R.id.txtVtotal)).setText(format.format(total));
+        NumberFormat formatter = new DecimalFormat("###,###,###,###");
         double myNumber = total;
         //String str = formatter.format(myNumber);
         String str = formatter.getCurrencyInstance(new Locale("en","US")).format(myNumber);
-        //String str = NumberFormat.getCurrencyInstance(Locale.US).format(myNumber);*/
-        txtVtotal.setText(format.format(total));
-    }
-
-    //probando desde casa
-    //prueba2 desde casa
-    //prueba 3 desde casa
-    //prueba 4 desde casa
-
-    //prueba 5 desde trabajo
-}
+        String str = NumberFormat.getCurrencyInstance(Locale.US).format(myNumber);*/
