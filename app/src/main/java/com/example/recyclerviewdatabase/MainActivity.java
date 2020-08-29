@@ -16,10 +16,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements SubTotalListener{
 
@@ -35,19 +33,19 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
         txtIva = (TextView)findViewById(R.id.txtIva);
         txtTotal = (TextView)findViewById(R.id.txtTotal);
 
-        final RecyclerView contactView = findViewById(R.id.myContactList);
+        final RecyclerView replacementView = findViewById(R.id.recyclerReplacementList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        contactView.setLayoutManager(linearLayoutManager);
-        contactView.setHasFixedSize(true);
+        replacementView.setLayoutManager(linearLayoutManager);
+        replacementView.setHasFixedSize(true);
         mDatabase = new SqliteDatabase(this);
-        final ArrayList<Contacts> allContacts = mDatabase.listContacts();
-        if (allContacts.size() > 0) {
-            contactView.setVisibility(View.VISIBLE);
-            ContactAdapter mAdapter = new ContactAdapter(this, allContacts,this);
-            contactView.setAdapter(mAdapter);
+        final ArrayList<Repuestos> allReplacement = mDatabase.listReplacement();
+        if (allReplacement.size() > 0) {
+            replacementView.setVisibility(View.VISIBLE);
+            QuotationAdapter mAdapter = new QuotationAdapter(this, allReplacement,this);
+            replacementView.setAdapter(mAdapter);
         }
         else {
-            contactView.setVisibility(View.GONE);
+            replacementView.setVisibility(View.GONE);
             Toast.makeText(this, "Ningún protocolo registrado en la base de datos", Toast.LENGTH_SHORT).show();
         }
         FloatingActionButton fbtnAdd = findViewById(R.id.fbtnAdd);
@@ -63,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
 
     private void addTaskDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
-        View subView = inflater.inflate(R.layout.add_contacts, null);
-        final EditText nameField = subView.findViewById(R.id.enterName);
-        final EditText noField = subView.findViewById(R.id.enterPhoneNum);
+        View subView = inflater.inflate(R.layout.dialog_add_edit_replace, null);
+        final EditText nameProdField = subView.findViewById(R.id.enterName);
+        final EditText valorProdField = subView.findViewById(R.id.enterPhoneNum);
         final EditText cantidadField = subView.findViewById(R.id.enterCantidad);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Agregar producto");
@@ -74,17 +72,17 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final String name = nameField.getText().toString();
-                final String ph_no = noField.getText().toString();
-                final String cantidad = cantidadField.getText().toString();
+                final String nameProd = nameProdField.getText().toString();
+                final String valorProd = valorProdField.getText().toString();
+                final String cantidadProd = cantidadField.getText().toString();
 
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(ph_no) || TextUtils.isEmpty(cantidad)) {
+                if (TextUtils.isEmpty(nameProd) || TextUtils.isEmpty(valorProd) || TextUtils.isEmpty(cantidadProd)) {
                     Toast.makeText(MainActivity.this, "Datos incompletos, inténtalo de nuevo!!!", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Contacts newContact = new Contacts(name, ph_no, cantidad);
-                    mDatabase.addContacts(newContact);
-                    Toast.makeText(MainActivity.this, "Cantidad: "+ cantidad+"\nNombre:  " +name+"\nValor: " + ph_no, Toast.LENGTH_LONG).show();
+                    Repuestos newReplacement = new Repuestos(nameProd, valorProd, cantidadProd);
+                    mDatabase.addQuotaReplacement(newReplacement);
+                    //Toast.makeText(MainActivity.this, "Cantidad: "+ cantidad+"\nNombre:  " +name+"\nValor: " + ph_no, Toast.LENGTH_LONG).show();
                     finish();
                     startActivity(getIntent());
                 }

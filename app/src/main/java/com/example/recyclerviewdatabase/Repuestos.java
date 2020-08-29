@@ -1,19 +1,19 @@
 package com.example.recyclerviewdatabase;
 
-public class Contacts {
+public class Repuestos {
     private int id;
     private String name;
     private String phoneNumber;
     private String cantidadProd;
     private int total;
 
-    Contacts(String name, String phno, String cantidadProd) {
+    Repuestos(String name, String phno, String cantidadProd) {
         this.name = name;
         this.phoneNumber = phno;
         this.cantidadProd = cantidadProd;
         //this.total = total;
     }
-    Contacts(int id, String name, String phno, String cantidadProd, int total) {
+    Repuestos(int id, String name, String phno, String cantidadProd, int total) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phno;

@@ -7,19 +7,19 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class QuotationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    TextView tvName, tvPhoneNum, tvCantProd,tvTotal;
-    ImageView deleteContact;
-    ImageView editContact;
+    TextView tvNameProd, tvValorProd, tvCantProd,tvTotal;
+    ImageView deleteReplacement;
+    ImageView editReplacement;
     private ItemClickListener itemClickListener;
 
-    ContactViewHolder(View itemView) {
+    QuotationViewHolder(View itemView) {
         super(itemView);
-        tvName = itemView.findViewById(R.id.contactName);
-        tvPhoneNum = itemView.findViewById(R.id.phoneNum);
-        deleteContact = itemView.findViewById(R.id.deleteContact);
-        editContact = itemView.findViewById(R.id.editContact);
+        tvNameProd = itemView.findViewById(R.id.prodName);
+        tvValorProd = itemView.findViewById(R.id.prodValor);
+        deleteReplacement = itemView.findViewById(R.id.deleteReplacement);
+        editReplacement = itemView.findViewById(R.id.editReplacement);
         tvCantProd = itemView.findViewById(R.id.txtCantidad);
         tvTotal = itemView.findViewById(R.id.txtTotal);
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +19,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> implements Filterable {
+public class QuotationAdapter extends RecyclerView.Adapter<QuotationViewHolder> implements Filterable {
 
 
     private Context context;
-    private ArrayList<Contacts> listContacts;
-    private ArrayList<Contacts> mArrayList;
+    private ArrayList<Repuestos> listReplacement;
+    private ArrayList<Repuestos> mArrayList;
     private SqliteDatabase mDatabase;
     float sum=0;
     private SubTotalListener subTotalListener;
     //private View.OnClickListener listener;
 
-    public ContactAdapter(Context context, ArrayList<Contacts> listContacts,SubTotalListener subTotalListener) {
+    public QuotationAdapter(Context context, ArrayList<Repuestos> listReplacement, SubTotalListener subTotalListener) {
         this.context = context;
-        this.listContacts = listContacts;
-        this.mArrayList = listContacts;
+        this.listReplacement = listReplacement;
+        this.mArrayList = listReplacement;
         mDatabase = new SqliteDatabase(context);
         this.subTotalListener = subTotalListener;
     }
@@ -42,38 +41,38 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
 
     @NonNull
     @Override
-    public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_list_layout, parent, false);
+    public QuotationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_replac_layout, parent, false);
         //view.setOnClickListener(this);
-        return new ContactViewHolder(view);
+        return new QuotationViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-        final Contacts contacts = listContacts.get(position);
-        holder.tvName.setText(contacts.getName());
-        holder.tvPhoneNum.setText(" $ " + contacts.getPhno());
-        holder.tvCantProd.setText(contacts.getCantidadProd());
-        holder.tvTotal.setText("$ " + contacts.getTotal());
+    public void onBindViewHolder(@NonNull QuotationViewHolder holder, int position) {
+        final Repuestos repuestos = listReplacement.get(position);
+        holder.tvNameProd.setText(repuestos.getName());
+        holder.tvValorProd.setText(" $ " + repuestos.getPhno());
+        holder.tvCantProd.setText(repuestos.getCantidadProd());
+        holder.tvTotal.setText("$ " + repuestos.getTotal());
 
         int total = 0;
-        for(int i = 0; i < listContacts.size(); i++){
+        for(int i = 0; i < listReplacement.size(); i++){
             //total = total + Integer.parseInt(listContacts.get(i).getPhno());
-            total = total + listContacts.get(i).getTotal();
+            total = total + listReplacement.get(i).getTotal();
         }
         countTotal(total);
 
-        holder.editContact.setOnClickListener(new View.OnClickListener() {
+        holder.editReplacement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editTaskDialog(contacts);
+                editTaskDialog(repuestos);
             }
         });
 
-        holder.deleteContact.setOnClickListener(new View.OnClickListener() {
+        holder.deleteReplacement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.deleteContact(contacts.getId());
+                mDatabase.deleteReplacement(repuestos.getId());
                 ((Activity) context).finish();
                 context.startActivity(((Activity) context).getIntent());
             }
@@ -82,10 +81,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(context,"Click en "+listContacts.get(position).getName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Click en "+ listReplacement.get(position).getName(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ReporteSysmed.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("name",listContacts.get(position).getPhno());
+                intent.putExtra("name", listReplacement.get(position).getPhno());
                 context.startActivity(intent);
             }
         });
@@ -103,24 +102,24 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    listContacts = mArrayList;
+                    listReplacement = mArrayList;
                 }
                 else {
-                    ArrayList<Contacts> filteredList = new ArrayList<>();
-                    for (Contacts contacts : mArrayList) {
-                        if (contacts.getName().toLowerCase().contains(charString)) {
-                            filteredList.add(contacts);
+                    ArrayList<Repuestos> filteredList = new ArrayList<>();
+                    for (Repuestos repuestos : mArrayList) {
+                        if (repuestos.getName().toLowerCase().contains(charString)) {
+                            filteredList.add(repuestos);
                         }
                     }
-                    listContacts = filteredList;
+                    listReplacement = filteredList;
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = listContacts;
+                filterResults.values = listReplacement;
                 return filterResults;
             }
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                listContacts = (ArrayList<Contacts>) filterResults.values;
+                listReplacement = (ArrayList<Repuestos>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
@@ -129,21 +128,21 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
 
     @Override
     public int getItemCount() {
-        int count = listContacts.size();
+        int count = listReplacement.size();
         return count;
 
     }
 
-    private void editTaskDialog(final Contacts contacts) {
+    private void editTaskDialog(final Repuestos repuestos) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View subView = inflater.inflate(R.layout.add_contacts, null);
+        View subView = inflater.inflate(R.layout.dialog_add_edit_replace, null);
         final EditText nameField = subView.findViewById(R.id.enterName);
         final EditText contactField = subView.findViewById(R.id.enterPhoneNum);
         final EditText cantProdField = subView.findViewById(R.id.enterCantidad);
-        if (contacts != null) {
-            nameField.setText(contacts.getName());
-            contactField.setText(String.valueOf(contacts.getPhno()));
-            cantProdField.setText(String.valueOf(contacts.getCantidadProd()));
+        if (repuestos != null) {
+            nameField.setText(repuestos.getName());
+            contactField.setText(String.valueOf(repuestos.getPhno()));
+            cantProdField.setText(String.valueOf(repuestos.getCantidadProd()));
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Editar protocolo");
@@ -167,8 +166,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
                 if (name.isEmpty() || ph_no.equals("0")|| cantidad.equals("0")) {
                     Toast.makeText(context, "  Espacios sin llenar \n\nVuelve a intentarlo!!!", Toast.LENGTH_LONG).show();
                 } else {
-                    mDatabase.updateContacts(new
-                            Contacts(Objects.requireNonNull(contacts).getId(), name, ph_no, cantidad,totalProd));
+                    mDatabase.updateQuotaReplacement(new
+                            Repuestos(Objects.requireNonNull(repuestos).getId(), name, ph_no, cantidad,totalProd));
                     ((Activity) context).finish();
                     context.startActivity(((Activity)
                             context).getIntent());
