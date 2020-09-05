@@ -24,6 +24,20 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
     private SqliteDatabase mDatabase;
     TextView txtSubtotal,txtIva,txtTotal;
 
+    String  cantidad0, producto0, subtotal0,
+            cantidad1, producto1, subtotal1,
+            cantidad2, producto2, subtotal2,
+            cantidad3, producto3, subtotal3,
+            cantidad4, producto4, subtotal4,
+            cantidad5, producto5, subtotal5,
+            cantidad6, producto6, subtotal6,
+            cantidad7, producto7, subtotal7,
+            cantidad8, producto8, subtotal8,
+            cantidad9, producto9, subtotal9;
+
+    int total0,total1,total2,total3,total4,total5,total6,total7,total8,total9;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +57,86 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
             replacementView.setVisibility(View.VISIBLE);
             QuotationAdapter mAdapter = new QuotationAdapter(this, allReplacement,this);
             replacementView.setAdapter(mAdapter);
+
+            cantidad0 = mDatabase.listReplacement().get(0).getCantidadProd();
+            producto0 = mDatabase.listReplacement().get(0).getName();
+            subtotal0 = mDatabase.listReplacement().get(0).getPhno();
+            total0 = mDatabase.listReplacement().get(0).getTotal();
         }
         else {
             replacementView.setVisibility(View.GONE);
             Toast.makeText(this, "Ningún protocolo registrado en la base de datos", Toast.LENGTH_SHORT).show();
         }
+
+        /*Toast.makeText(this,    "Item: " +allReplacement.size()
+                , Toast.LENGTH_SHORT).show();*/
+
+        if (allReplacement.size() <= 1){
+            cantidad1 = " ";producto1 = " ";subtotal1 = " ";total1 = 0;
+        }else{
+            cantidad1 = allReplacement.get(1).getCantidadProd();producto1 = allReplacement.get(1).getName();
+            subtotal1 = allReplacement.get(1).getPhno();total1 = allReplacement.get(1).getTotal();
+        }
+
+        if (allReplacement.size() <= 2){
+            cantidad2 = " ";producto2 = " ";subtotal2 = " ";total2 = 0;
+        }else{
+            cantidad2 = allReplacement.get(2).getCantidadProd();producto2 = allReplacement.get(2).getName();
+            subtotal2 = allReplacement.get(2).getPhno();total2 = allReplacement.get(2).getTotal();
+        }
+
+        if (allReplacement.size() <= 3){
+            cantidad3 = " ";producto3 = " ";subtotal3 = " ";total3 = 0;
+        }else{
+            cantidad3 = allReplacement.get(3).getCantidadProd();producto3 = allReplacement.get(3).getName();
+            subtotal3 = allReplacement.get(3).getPhno();total3 = allReplacement.get(3).getTotal();
+        }
+
+        if (allReplacement.size() <= 4){
+            cantidad4 = " ";producto4 = " ";subtotal4 = " ";total4 = 0;
+        }else{
+            cantidad4 = allReplacement.get(4).getCantidadProd();producto4 = allReplacement.get(4).getName();
+            subtotal4 = allReplacement.get(4).getPhno();total4 = allReplacement.get(4).getTotal();
+        }
+
+        if (allReplacement.size() <= 5){
+            cantidad5 = " ";producto5 = " ";subtotal5 = " ";total5 = 0;
+        }else{
+            cantidad5 = allReplacement.get(5).getCantidadProd();producto5 = allReplacement.get(5).getName();
+            subtotal5 = allReplacement.get(5).getPhno();total5 = allReplacement.get(5).getTotal();
+        }
+
+        if (allReplacement.size() <= 6){
+            cantidad6 = " ";producto6 = " ";subtotal6 = " ";total6 = 0;
+        }else{
+            cantidad6 = allReplacement.get(6).getCantidadProd();producto6 = allReplacement.get(6).getName();
+            subtotal6 = allReplacement.get(6).getPhno();total6 = allReplacement.get(6).getTotal();
+        }
+
+        if (allReplacement.size() <= 7){
+            cantidad7 = " ";producto7 = " ";subtotal7 = " ";total7 = 0;
+        }else{
+            cantidad7 = allReplacement.get(7).getCantidadProd();producto7 = allReplacement.get(7).getName();
+            subtotal7 = allReplacement.get(7).getPhno();total7 = allReplacement.get(7).getTotal();
+        }
+
+        if (allReplacement.size() <= 8){
+            cantidad8 = " ";producto8 = " ";subtotal8 = " ";total8 = 0;
+        }else{
+            cantidad8 = allReplacement.get(8).getCantidadProd();producto8 = allReplacement.get(8).getName();
+            subtotal8 = allReplacement.get(8).getPhno();total8 = allReplacement.get(8).getTotal();
+        }
+
+        if (allReplacement.size() <= 9){
+            cantidad9 = " ";producto9 = " ";subtotal9 = " ";total9 = 0;
+        }else{
+            cantidad9 = allReplacement.get(9).getCantidadProd();producto9 = allReplacement.get(9).getName();
+            subtotal9 = allReplacement.get(9).getPhno();total9 = allReplacement.get(9).getTotal();
+        }
+
+
+
+
         FloatingActionButton fbtnAdd = findViewById(R.id.fbtnAdd);
         fbtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
             }
         });
 
+        Toast.makeText(this,    cantidad0 + " " + producto0 + " " +subtotal0 + " " +total0 + "\n"
+                        + cantidad1 + " " + producto1 + " " +subtotal1 + " " +total1 + "\n"
+                        + cantidad2 + " " + producto2 + " " +subtotal2 + " " +total2 + "\n"
+                , Toast.LENGTH_SHORT).show();
     }
 
 
