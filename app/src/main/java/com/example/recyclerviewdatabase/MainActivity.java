@@ -53,15 +53,12 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
         replacementView.setHasFixedSize(true);
         mDatabase = new SqliteDatabase(this);
         final ArrayList<Repuestos> allReplacement = mDatabase.listReplacement();
+
+
         if (allReplacement.size() > 0) {
             replacementView.setVisibility(View.VISIBLE);
             QuotationAdapter mAdapter = new QuotationAdapter(this, allReplacement,this);
             replacementView.setAdapter(mAdapter);
-
-            cantidad0 = mDatabase.listReplacement().get(0).getCantidadProd();
-            producto0 = mDatabase.listReplacement().get(0).getName();
-            subtotal0 = mDatabase.listReplacement().get(0).getPhno();
-            total0 = mDatabase.listReplacement().get(0).getTotal();
         }
         else {
             replacementView.setVisibility(View.GONE);
@@ -70,6 +67,13 @@ public class MainActivity extends AppCompatActivity implements SubTotalListener{
 
         /*Toast.makeText(this,    "Item: " +allReplacement.size()
                 , Toast.LENGTH_SHORT).show();*/
+
+        if (allReplacement.size() <= 0){
+            cantidad0 = " ";producto0 = " ";subtotal0 = " ";total0 = 0;
+        }else{
+            cantidad0 = allReplacement.get(0).getCantidadProd();producto0 = allReplacement.get(0).getName();
+            subtotal0 = allReplacement.get(0).getPhno();total0 = allReplacement.get(0).getTotal();
+        }
 
         if (allReplacement.size() <= 1){
             cantidad1 = " ";producto1 = " ";subtotal1 = " ";total1 = 0;
